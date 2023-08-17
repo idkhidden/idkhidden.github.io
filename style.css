@@ -8,10 +8,7 @@
     flex-direction: column;
     width: 100vw;
     font-family: Verdana, Tahoma, sans-serif;
-    position: absoulute;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
+ 
 }
 
 header {
