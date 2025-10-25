@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>idkhidden - About</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="toolbar">
+        <span class="toolbar-item">File</span>
+        <span class="toolbar-item">Edit</span>
+        <span class="toolbar-item">Jump</span>
+        <span class="toolbar-item">Search</span>
+        <span class="toolbar-item">View</span>
+        <span class="toolbar-item">Debugger</span>
+        <span class="toolbar-item">Options</span>
+        <span class="toolbar-item">Windows</span>
+        <span class="toolbar-item">Help</span>
+    </div>
+
+    <div class="visualization-bar" id="visualizationBar"></div>
+
+    <main>
+        <aside>
+            <div class="sidebar-header">
+                Functions
+            </div>
+            <div class="function-list" id="functionList">
+            </div>
+        </aside>
+
+        <div class="content-area">
+            <div class="tabs">
+                <div class="tab active">IDA View-A</div>
+                <div class="tab">Pseudocode-A</div>                            
+                <div class="tab">Hex View-1</div>
+                <div class="tab">Local Types</div>
+                <div class="tab">Imports</div>
+                <div class="tab">Exports</div>
+            </div>
+
+            <div class="disassembly-view">
+                <div class="assembly-panel">
+                    <div class="address-column" id="addressColumn">
+                    </div>
+                    <div class="code-column" id="codeColumn">
+                    </div>
+                </div>
+                <div class="pseudocode-panel">
+                    <div class="pseudocode-line"><span class="keyword">int</span> __fastcall main(int argc, const char **argv, const char **envp)</div>
+                    <div class="pseudocode-line">{</div>
+                    <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Hey!</span></div>
+                    <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// idkhidden here</span></div>
+                    <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 18 year old offensive security researcher.</span></div>
+                    <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// interested in reverse engineering and application security.</span></div>
+                    <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// likes to break into stuff.</span></div>
+                    <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// founder of ReverseSec, a security auditing firm focused on enhancing application security.</span></div>
+                    <div class="pseudocode-line">}</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
