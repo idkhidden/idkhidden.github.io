@@ -49,121 +49,18 @@
                 </div>
 
     <div class="pseudocode-panel">
-  <div class="pseudocode-line"><span class="keyword">void</span> __fastcall eac()</div>
-  <div class="pseudocode-line">{</div>
+<div class="pseudocode-line"><span class="keyword">void</span> __fastcall youtube()</div>
+<div class="pseudocode-line">{</div>
+<div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Tricking Users with YouTube's Redirect System</span></div>
+<div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://reversesec.org/research/youtube.html" target="_blank">https://reversesec.org/research/youtube.html</a></div>
+<div class="pseudocode-line">}</div>
+<div class="pseudocode-line"></div>
 
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Tricking Easy Anti-Cheat into Protecting Any Application</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// This research outlines a critical vulnerability discovered in Easy Anti-Cheat (EAC) that</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// allows any application to gain the same level of security as a supported game. The</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// exploit is alarmingly simple and requires minimal effort to execute.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Discovery</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// The research began with an attempt to better understand how the EAC launcher functions</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// and how it validates applications for protection. After reviewing the system, I noticed</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// a significant flaw the EAC launcher does not properly validate certificates.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Exploit</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// With the absence of certificate validation, I first removed the Certificates from the</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Easy Anti Cheat folder. Then, I proceeded to replace the original game executable</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// (in this case, Fortnite) with the application.</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Once the changes were made, I launched the EAC launcher. The launcher did not reject</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// the application, and my application was now running with full EAC protection.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Proof of Concept</span></div>
-  <video width="300" height="150" controls="">
-            <source src="EAC.mp4" type="video/mp4">
-              <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// your browser does not support the video tag.</span></div>
-        </video>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Conclusion</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// After finding this vulnerability, I reported it to Epic Games. They responded saying it</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// was a "duplicate report," as the issue had been reported in 2023. The most concerning</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// part is that the vulnerability still hasn't been fixed.</span></div>
-
-  <div class="pseudocode-line">}</div>
-
-  <div class="pseudocode-line"></div>
-
-  <div class="pseudocode-line"><span class="keyword">void</span> __fastcall youtube()</div>
-  <div class="pseudocode-line">{</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Tricking Users with YouTube's Redirect System</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// This research explores a manipulation technique in YouTube’s redirect system that</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// allows an attacker to spoof URLs, misleading users about their actual destination.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Discovery</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// I found that YouTube uses the q parameter to handle external links. However, by</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// manipulating the URL structure, it was possible to trick the system into displaying a</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// trusted domain while redirecting to a different site.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Exploit</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// The issue lies in how YouTube sanitize URLs. By using the \@ symbol, an attacker can</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// craft a misleading link:</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// https://www.youtube.com/redirect?q=www.verytrustedurl.com\@reversesec.org</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Here, YouTube presents www.verytrustedurl.com as the destination, but the actual</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// redirection leads to reversesec.org.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Proof of Concept</span></div>
-  <video width="300" height="150" controls="">
-            <source src="youtube.mp4" type="video/mp4">
-              <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// your browser does not support the video tag.</span></div>
-        </video>  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Conclusion</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// While seemingly minor, this issue could be used in phishing campaigns to bypass user</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// skepticism, as the YouTube redirect page adds legitimacy to the spoofed link. I</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// reported this behavior to YouTube, but they determined it was not a security</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// vulnerability. Despite this, refining their URL sanitizer could prevent misuse.</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// (THEY FIXED IT AFTER I MADE A TWEET)</span></div>
-
-  <div class="pseudocode-line">}</div>
-
-  <div class="pseudocode-line"></div>
-
-  <div class="pseudocode-line"><span class="keyword">void</span> __fastcall themida()</div>
-  <div class="pseudocode-line">{</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Themida Unpacking: One Breakpoint, Zero Execution</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Themida is a well-known software protection tool designed to prevent reverse</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// engineering and analysis. However, by leveraging a single hardware breakpoint, it</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// is possible to unpack a Themida-protected binary without executing any of its code.</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// This approach minimizes risk while allowing for further analysis.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Themida employs multiple layers of protection, including anti-debugging, obfuscation,</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// and virtualized code to obscure the binary. Typically, unpacking requires execution,</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// which can trigger unwanted behaviors.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Exploit</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// We first disable Themida’s anti-debugging features using ScyllaHide. This tool bypasses</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// anti-debugging checks and ensures that the debugger can attach to the process without</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// interference.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Next, a execute memory breakpoint is set on the .text section of the binary, which is</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// the first section header in the binary.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Once the breakpoint is in place, we execute the binary. The execution stops at the</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// breakpoint immediately. This allows us to inspect the memory, where we find that the</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Import Address Table (IAT) has been fully restored and the binary is in its unpacked state.</span></div>
-  <div class="pseudocode-line">&nbsp;</div>
-
-
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Conclusion</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Using this method, the packed binary is successfully unpacked without executing any</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// user code. This is useful for analyzing potentially malicious or unknown software while</span></div>
-  <div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// avoiding the risks associated with execution.</span></div>
-
-  <div class="pseudocode-line">}</div>
+<div class="pseudocode-line"><span class="keyword">void</span> __fastcall eac()</div>
+<div class="pseudocode-line">{</div>
+<div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Tricking Easy Anti-Cheat into Protecting Any Application</span></div>
+<div class="pseudocode-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://reversesec.org/research/eac.html" target="_blank">https://reversesec.org/research/eac.html</a></div>
+<div class="pseudocode-line">}</div>
 </div>
             </div>
         </div>
@@ -174,3 +71,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
