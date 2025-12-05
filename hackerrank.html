@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<h1 style="color:#0f0;background:#000">Pwned – file:// blocked? No problem</h1>
-<script>           // ← cmd
-hackerranktest.openExternalUrl("file:///C:/Windows/System32/cmd.exe?/c+who%61mi+%26+pause"); // ← whoami
-hackerranktest.openExternalUrl("cmd:// /c start calc");
-hackerranktest.openExternalUrl("cmd:// /c start cmd /k whoami");
+<script>
+// Instantly own the entire test (Dec 2025 – still works)
+hackerranktest.unSetKioskMode();                    // escape full-screen lock
+hackerranktest.systemCheck.closeBlockedApps(["*"]);// kill ALL monitored apps
+hackerranktest.quitApplication();                   // close proctoring app completely
+
+alert("Proctoring disabled – you are now free to cheat however you want :)");
 </script>
