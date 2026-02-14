@@ -29,29 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { comment: '; ------------------------------------------------------------' }
             ]
         },
-        'research.html': {
-            label: 'Research:',
-            code: [
-                { comment: '; ------------------------------------------------------------' },
-                { addr: '.idkhidden:0x1337', mnemonic: 'push', operands: 'rbp', comment: '' },
-                { addr: '.idkhidden:0x1338', mnemonic: 'mov', operands: 'rbp, rsp', comment: '' },
-                { addr: '.idkhidden:0x133A', mnemonic: 'mov', operands: 'al, [rbp-0x8]' },
-                { addr: '.idkhidden:0x133D', mnemonic: 'cmp', operands: 'al, 1'},
-                { addr: '.idkhidden:0x133F', mnemonic: 'jne', operands: '0x1358'},
-                { addr: '.idkhidden:0x1341', mnemonic: 'lea', operands: 'rdx, [rbp-0x10]'},
-                { addr: '.idkhidden:0x1345', mnemonic: 'xor', operands: 'eax, eax'},
-                { addr: '.idkhidden:0x1347', mnemonic: 'mov', operands: 'ecx, 1'},
-                { addr: '.idkhidden:0x134A', mnemonic: 'lock cmpxchg', operands: 'dword ptr [rdx], ecx', comment: '; spinlock go brrr'},
-                { addr: '.idkhidden:0x134E', mnemonic: 'jnz', operands: '0x1345'},
-                { addr: '.idkhidden:0x1350', mnemonic: 'call', operands: 'research'},
-                { addr: '.idkhidden:0x1354', mnemonic: 'mov', operands: 'dword ptr [rdx], 0' },
-                { addr: '.idkhidden:0x1358', mnemonic: 'pop', operands: 'rbp', comment: '' },
-                { addr: '.idkhidden:0x1359', mnemonic: 'ret', operands: '', comment: '' },
-                { addr: '.idkhidden:0x1360', mnemonic: 'nop', operands: '' },
-                { addr: '.idkhidden:0x1361', mnemonic: 'ret', operands: '', comment: '' },
-                { comment: '; ------------------------------------------------------------' },
-            ]
-        },
         'projects.html': {
             label: 'Projects:',
             code: [
@@ -213,3 +190,4 @@ document.addEventListener('DOMContentLoaded', () => {
     populateAssemblyCode();
 
 });
+
