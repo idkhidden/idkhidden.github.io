@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pageMap = {
             'About': 'index.html',
-            'Research': 'research.html',
             'Projects': 'projects.html',
             'Contact': 'contact.html'
         };
@@ -212,4 +211,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     populateFunctionList();
     populateAssemblyCode();
+
 });
