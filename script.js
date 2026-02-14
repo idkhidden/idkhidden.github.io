@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const functions = [
-        'About', 'Research', 'Projects', 'Contact'
+        'About', 'Projects', 'Contact'
     ];
 
     // This is a map of page filenames to their specific assembly code and labels.
@@ -190,4 +190,5 @@ document.addEventListener('DOMContentLoaded', () => {
     populateAssemblyCode();
 
 });
+
 
