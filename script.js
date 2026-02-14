@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { addr: '.idkhidden:0x134B', mnemonic: 'mov', operands: 'rcx'},
                 { addr: '.idkhidden:0x134C', mnemonic: 'call', operands: 'about'},
                 { addr: '.idkhidden:0x134D', mnemonic: 'jmp', operands: '0x1354'},
-                { addr: '.idkhidden:0x134E', mnemonic: 'call', operands: 'research'},
                 { addr: '.idkhidden:0x1350', mnemonic: 'call', operands: 'projects'},
                 { addr: '.idkhidden:0x1352', mnemonic: 'call', operands: 'contacts'},
                 { addr: '.idkhidden:0x1354', mnemonic: 'pop', operands: 'rbp'},
@@ -190,5 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
     populateAssemblyCode();
 
 });
+
 
 
